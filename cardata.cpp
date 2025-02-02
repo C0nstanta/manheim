@@ -14,104 +14,111 @@ CarData::CarData(QWidget *parent, Ui::MainWindow* tmpUI)
 
 }
 
-void CarData::carDataActivate(const QString& country)
+void CarData::carDataActivate()
 {
-    qDebug() << "engineTypeComboBox" << country;
+    // qDebug() << "engineTypeComboBox" << country;
 
 
     int x = 440;
     int y = 190;
 
-    carDataFrame(x, y);
-    engineTypeComboBox(x, y, country);
-    engineCapacityLineEdit(x, y, country);
+    // carDataFrame(x, y);
+    engineTypeComboBox();
+    ownerTypeComboBox();
 }
 
 void CarData::carDataDeactivate() {
 
-    mLabelEngineType->clear();
-    delete mLabelEngineType;
-    mLabelEngineType = nullptr;
+    // mLabelEngineType->clear();
+    // delete mLabelEngineType;
+    // mLabelEngineType = nullptr;
 
-    mCBEngineType->clear();
-    delete mCBEngineType;
-    mCBEngineType = nullptr;
+    // mCBEngineType->clear();
+    // delete mCBEngineType;
+    // mCBEngineType = nullptr;
 
-    mLabelEngineCapacity->clear();
-    delete mLabelEngineCapacity;
-    mLabelEngineCapacity = nullptr;
+    // mLabelEngineCapacity->clear();
+    // delete mLabelEngineCapacity;
+    // mLabelEngineCapacity = nullptr;
 
-    mLineEditEngineCapacity->clear();
-    delete mLineEditEngineCapacity;
-    mLineEditEngineCapacity = nullptr;
+    // mLineEditEngineCapacity->clear();
+    // delete mLineEditEngineCapacity;
+    // mLineEditEngineCapacity = nullptr;
 
-    mCarDataFrame->clearMask();
-    delete mCarDataFrame;
-    mCarDataFrame = nullptr;
+    // mCarDataFrame->clearMask();
+    // delete mCarDataFrame;
+    // mCarDataFrame = nullptr;
 }
 
-void CarData::carDataFrame(const int x, const int y)
+// void CarData::carDataFrame(const int x, const int y)
+// {
+
+    // mCarDataFrame = new QFrame(ui->centrawidget);
+    // mCarDataFrame->setGeometry(x, y, 330, 250);
+    // mCarDataFrame->setLineWidth(3);
+    // mCarDataFrame->setFrameShadow(QFrame::Raised);
+    // mCarDataFrame->setFrameShape(QFrame::StyledPanel);
+    // mCarDataFrame->show();
+
+// }
+
+
+void CarData::engineTypeComboBox()
 {
+    // qDebug() << "engineTypeComboBox 1 " << country;
 
-    mCarDataFrame = new QFrame(ui->widget);
-    mCarDataFrame->setGeometry(x, y, 330, 250);
-    mCarDataFrame->setLineWidth(3);
-    mCarDataFrame->setFrameShadow(QFrame::Raised);
-    mCarDataFrame->setFrameShape(QFrame::StyledPanel);
-    mCarDataFrame->show();
+    // mLabelEngineType = new QLabel(ui->centrawidget);
+    // mLabelEngineType->setGeometry(x + 10, y + 10, 130, 16);
+    // mLabelEngineType->setText("Engine Type");
+    // mLabelEngineType->show();
 
+
+    // mCBEngineType = new QComboBox(ui->centrawidget);
+    // mCBEngineType->setGeometry(x + 2, y + 27, 151, 32);
+
+    ui->CB_EngineType->addItem("Gasoline");
+    ui->CB_EngineType->addItem("Diesel");
+    ui->CB_EngineType->addItem("Electric");
+    ui->CB_EngineType->addItem("Hybrid");
+    // ui->CB_EngineType->show();
+
+    // connect(mCBEngineType, &QComboBox::currentTextChanged, this, &CarData::engineTypeChanged);
+
+    // qDebug() << "engineTypeComboBox 2 " << country;
 }
 
-
-void CarData::engineTypeComboBox(const int x, const int y, const QString& country)
+void CarData::ownerTypeComboBox()
 {
-    qDebug() << "engineTypeComboBox 1 " << country;
+    ui->CB_OwnerType->addItem("Individual");
+    ui->CB_OwnerType->addItem("Legal entity");
 
-    mLabelEngineType = new QLabel(ui->widget);
-    mLabelEngineType->setGeometry(x + 10, y + 10, 130, 16);
-    mLabelEngineType->setText("Engine Type");
-    mLabelEngineType->show();
-
-
-    mCBEngineType = new QComboBox(ui->widget);
-    mCBEngineType->setGeometry(x + 2, y + 27, 151, 32);
-
-    mCBEngineType->addItem("Gasoline");
-    mCBEngineType->addItem("Diesel");
-    mCBEngineType->addItem("Electric");
-    mCBEngineType->addItem("Hybrid");
-    mCBEngineType->show();
-
-    connect(mCBEngineType, &QComboBox::currentTextChanged, this, &CarData::engineTypeChanged);
-
-    qDebug() << "engineTypeComboBox 2 " << country;
 }
 
-void CarData::engineCapacityLineEdit(const int x, const int y, const QString& country)
+void CarData::engineCapacityLineEdit()
 {
-    mLabelEngineCapacity = new QLabel(ui->widget);
-    mLabelEngineCapacity->setGeometry(x + 130 + 30, y + 10, 140, 16);
-    mLabelEngineCapacity->setText("Engine capacity(cc/cm)");
-    mLabelEngineCapacity->show();
+    // mLabelEngineCapacity = new QLabel(ui->centrawidget);
+    // mLabelEngineCapacity->setGeometry(x + 130 + 30, y + 10, 140, 16);
+    // mLabelEngineCapacity->setText("Engine capacity(cc/cm)");
+    // mLabelEngineCapacity->show();
 
-    mLineEditEngineCapacity = new QLineEdit(ui->widget);
-    mLineEditEngineCapacity->setGeometry(x + 130 + 30, y + 30, 115, 20);
-    mLineEditEngineCapacity->setText("0");
-    mLineEditEngineCapacity->show();
+    // mLineEditEngineCapacity = new QLineEdit(ui->centrawidget);
+    // mLineEditEngineCapacity->setGeometry(x + 130 + 30, y + 30, 115, 20);
+    // mLineEditEngineCapacity->setText("0");
+    // mLineEditEngineCapacity->show();
 
 
 }
 
-void CarData::yearOfProductionLineEdit(const int x, const int y, const QString& country)
+void CarData::yearOfProductionLineEdit()
 {
     // mLineEditYearProduct = new QLineEdit(ui->widget);
 }
 
 // getters bunch
-QFrame* CarData::getCarDataFrame()
-{
-    return mCarDataFrame;
-}
+// QFrame* CarData::getCarDataFrame()
+// {
+//     return mCarDataFrame;
+// }
 
 QComboBox* CarData::getCarDataEngineType()
 {

@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     mInsurance->insuranceComboBox();
     mDestinationCountry->destiantionCountryComboBox();
-
+    mCarData->carDataActivate();
 
 
     connect(ui->CB_Auction, &QComboBox::currentTextChanged,
@@ -55,18 +55,18 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::handleComboBoxChange(const QString& text)
 {
-    if(text == "Ukraine") {
-        connect(mCarData, &CarData::engineTypeChanged, this, &MainWindow::onEngineTypeChanged);
-        mCarData->carDataActivate(text);
+    // if(text == "Ukraine") {
+    //     connect(mCarData, &CarData::engineTypeChanged, this, &MainWindow::onEngineTypeChanged);
+    //     mCarData->carDataActivate(text);
 
-        qDebug() << "carData activated" << text;
-    } else {
-        if(mCarData->getCarDataEngineType() != nullptr) {
-            mCarData->carDataDeactivate();
+    //     qDebug() << "carData activated" << text;
+    // } else {
+    //     if(mCarData->getCarDataEngineType() != nullptr) {
+    //         mCarData->carDataDeactivate();
 
-            qDebug() << "carData cleared" << text;
-        }
-    }
+    //         qDebug() << "carData cleared" << text;
+    //     }
+    // }
 }
 
 void MainWindow::handleLineEditChange(const QString &text)

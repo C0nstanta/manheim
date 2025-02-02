@@ -16,15 +16,16 @@ class CarData : public QMainWindow
 public:
     CarData(QWidget *parent = nullptr, Ui::MainWindow* tmpUI = nullptr);
 
-    void carDataActivate(const QString& country);
+    void carDataActivate();
     void carDataDeactivate();
-    void engineTypeComboBox(const int x, const int y, const QString& country);
-    void engineCapacityLineEdit(const int x, const int y, const QString& country);
-    void yearOfProductionLineEdit(const int x, const int y, const QString& country);
+    void engineTypeComboBox();
+    void engineCapacityLineEdit();
+    void yearOfProductionLineEdit();
+    void ownerTypeComboBox();
 
-    void carDataFrame(const int x, const int y);
+    // void carDataFrame(const int x, const int y);
 
-    QFrame* getCarDataFrame();
+    // QFrame* getCarDataFrame();
     QComboBox* getCarDataEngineType();
     QLabel* getLabelEngineType();
     QLineEdit* getLineEditEngineCapacity();
