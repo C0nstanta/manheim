@@ -5,6 +5,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , mAuction(new Auction(nullptr, ui))
+    , mCarData(new CarData(nullptr, ui))
     , mCarDealer(new CarDealer(nullptr, ui))
     , mInsurance(new Insurance(nullptr, ui))
     , mPortLoading(new PortLoading(nullptr, ui))
@@ -45,7 +46,41 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->mCBDestinationCountry, &QComboBox::currentTextChanged,
             this, &MainWindow::handleComboBoxChange);
     connect(ui->pushButtonQuit, &QPushButton::clicked, this, &QCoreApplication::quit, Qt::QueuedConnection);
+
+
+
 }
+
+
+
+void MainWindow::handleComboBoxChange(const QString& text)
+{
+    if(text == "Ukraine") {
+        connect(mCarData, &CarData::engineTypeChanged, this, &MainWindow::onEngineTypeChanged);
+        mCarData->carDataActivate(text);
+
+        qDebug() << "carData activated" << text;
+    } else {
+        if(mCarData->getCarDataEngineType() != nullptr) {
+            mCarData->carDataDeactivate();
+
+            qDebug() << "carData cleared" << text;
+        }
+    }
+}
+
+void MainWindow::handleLineEditChange(const QString &text)
+{
+    qDebug() << "Line Edit Value: " << text;
+}
+
+void MainWindow::onEngineTypeChanged(const QString &text)
+{
+    qDebug() << "Selected Engine Type: " << text;
+}
+
+
+
 
 MainWindow::~MainWindow()
 {
@@ -53,14 +88,4 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::handleComboBoxChange(const QString& text)
-{
-    qDebug() << "User selected: " << text;
-
-}
-
-void MainWindow::handleLineEditChange(const QString &text)
-{
-    qDebug() << "Line Edit Value: " << text;
-}
 
