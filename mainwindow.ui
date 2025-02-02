@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>527</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,207 +17,162 @@
    <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>0</x>
       <y>0</y>
       <width>781</width>
-      <height>571</height>
+      <height>591</height>
      </rect>
     </property>
-    <widget class="QComboBox" name="CB_Auction">
+    <widget class="QWidget" name="gridLayoutWidget">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>30</y>
-       <width>251</width>
-       <height>32</height>
+       <y>0</y>
+       <width>771</width>
+       <height>271</height>
       </rect>
      </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton">
-     <property name="geometry">
-      <rect>
-       <x>620</x>
-       <y>130</y>
-       <width>151</width>
-       <height>32</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Calculate</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="mCBDestinationCountry">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>260</y>
-       <width>251</width>
-       <height>32</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="CB_USPortLoading">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>200</y>
-       <width>251</width>
-       <height>32</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lAuction">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>121</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>US Auction</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lDestinationCountry">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>240</y>
-       <width>131</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Shipment Destination</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lUSPort">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>180</y>
-       <width>131</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Shipment Port</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lCarDealerFee">
-     <property name="geometry">
-      <rect>
-       <x>420</x>
-       <y>10</y>
-       <width>141</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Car Dealer Fees (USD)</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lPortCharges">
-     <property name="geometry">
-      <rect>
-       <x>270</x>
-       <y>180</y>
-       <width>121</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Port Charges USD</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lEditPortCharges">
-     <property name="geometry">
-      <rect>
-       <x>270</x>
-       <y>200</y>
-       <width>121</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lEditCarDealerFees">
-     <property name="geometry">
-      <rect>
-       <x>420</x>
-       <y>30</y>
-       <width>141</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lCarInsurance">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>240</y>
-       <width>131</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Car Insurance</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="CB_CarInsurance">
-     <property name="geometry">
-      <rect>
-       <x>270</x>
-       <y>260</y>
-       <width>121</width>
-       <height>32</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lAuctionPrice">
-     <property name="geometry">
-      <rect>
-       <x>250</x>
-       <y>10</y>
-       <width>131</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Buy price</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lEditBrokerFees">
-     <property name="geometry">
-      <rect>
-       <x>250</x>
-       <y>30</y>
-       <width>131</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButtonQuit">
-     <property name="geometry">
-      <rect>
-       <x>620</x>
-       <y>20</y>
-       <width>151</width>
-       <height>32</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Quit</string>
-     </property>
+     <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0,0,0,0" columnstretch="0,2,1,1,0,1">
+      <item row="4" column="2">
+       <widget class="QLineEdit" name="lEditPortCharges">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QComboBox" name="CB_USPortLoading"/>
+      </item>
+      <item row="1" column="5">
+       <widget class="QPushButton" name="pushButtonQuit">
+        <property name="text">
+         <string>Quit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="lUSPort">
+        <property name="text">
+         <string>Shipment Port</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QComboBox" name="CB_Auction">
+        <property name="currentText">
+         <string extracomment="Auctions of USA"/>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QLabel" name="lPortCharges">
+        <property name="text">
+         <string>Port Charges USD</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="5">
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Calculate</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QLabel" name="lCarInsurance">
+        <property name="text">
+         <string>Car Insurance</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLabel" name="lDestinationCountry">
+        <property name="text">
+         <string>Shipment Destination</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="lCarDealerFee">
+        <property name="text">
+         <string>Car Dealer Fees (USD)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QComboBox" name="mCBDestinationCountry"/>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLineEdit" name="lEditBrokerFees">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2">
+       <widget class="QComboBox" name="CB_CarInsurance"/>
+      </item>
+      <item row="2" column="3">
+       <widget class="QLineEdit" name="lEditCarDealerFees">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="lAuctionPrice">
+        <property name="text">
+         <string>Buy price</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="lAuction">
+        <property name="text">
+         <string>US Auction</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="9" column="4">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
     </widget>
    </widget>
   </widget>
