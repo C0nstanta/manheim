@@ -9,6 +9,8 @@ CarDealer::CarDealer(QWidget *parent, Ui::MainWindow* tmpUI)
 
 void CarDealer::dealerLineEdit()
 {
-    ui->lEditCarDealerFees->textEdited(0);
+    QIntValidator *validator = new QIntValidator(0, 99999999, this);
+    ui->LE_CarDealerFees->setValidator(validator);
+    ui->LE_CarDealerFees->textEdited(0);
 }
 

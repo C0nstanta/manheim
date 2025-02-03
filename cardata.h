@@ -18,14 +18,18 @@ public:
 
     void carDataActivate();
     void carDataDeactivate();
+
+    void enginePowerLineEdit();
+    void vehicleWeightLineEdit();
     void engineTypeComboBox();
     void engineCapacityLineEdit();
     void yearOfProductionLineEdit();
     void ownerTypeComboBox();
 
-    // void carDataFrame(const int x, const int y);
 
-    // QFrame* getCarDataFrame();
+
+
+
     QComboBox* getCarDataEngineType();
     QLabel* getLabelEngineType();
     QLineEdit* getLineEditEngineCapacity();

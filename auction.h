@@ -13,12 +13,12 @@ class Auction : public QMainWindow
 public:
     Auction(QWidget *parent = nullptr, Ui::MainWindow* tmpUI = nullptr);
 
-    void auctionComboBox();
+    void auctionInUsaComboBox();
     void auctionLabel();
-    void auctionLineEdit();
+    void auctionCarDealerFeesLineEdit();
+    void auctionCarBuyPriceLineEdit();
 
-
-private:
+private:    
     Ui::MainWindow* ui;
     QComboBox* mCBAuction;
 };

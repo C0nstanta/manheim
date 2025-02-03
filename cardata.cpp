@@ -16,15 +16,12 @@ CarData::CarData(QWidget *parent, Ui::MainWindow* tmpUI)
 
 void CarData::carDataActivate()
 {
-    // qDebug() << "engineTypeComboBox" << country;
-
-
-    int x = 440;
-    int y = 190;
-
-    // carDataFrame(x, y);
     engineTypeComboBox();
     ownerTypeComboBox();
+    yearOfProductionLineEdit();
+    enginePowerLineEdit();
+    vehicleWeightLineEdit();
+    engineCapacityLineEdit();
 }
 
 void CarData::carDataDeactivate() {
@@ -50,41 +47,12 @@ void CarData::carDataDeactivate() {
     // mCarDataFrame = nullptr;
 }
 
-// void CarData::carDataFrame(const int x, const int y)
-// {
-
-    // mCarDataFrame = new QFrame(ui->centrawidget);
-    // mCarDataFrame->setGeometry(x, y, 330, 250);
-    // mCarDataFrame->setLineWidth(3);
-    // mCarDataFrame->setFrameShadow(QFrame::Raised);
-    // mCarDataFrame->setFrameShape(QFrame::StyledPanel);
-    // mCarDataFrame->show();
-
-// }
-
-
 void CarData::engineTypeComboBox()
 {
-    // qDebug() << "engineTypeComboBox 1 " << country;
-
-    // mLabelEngineType = new QLabel(ui->centrawidget);
-    // mLabelEngineType->setGeometry(x + 10, y + 10, 130, 16);
-    // mLabelEngineType->setText("Engine Type");
-    // mLabelEngineType->show();
-
-
-    // mCBEngineType = new QComboBox(ui->centrawidget);
-    // mCBEngineType->setGeometry(x + 2, y + 27, 151, 32);
-
     ui->CB_EngineType->addItem("Gasoline");
     ui->CB_EngineType->addItem("Diesel");
     ui->CB_EngineType->addItem("Electric");
     ui->CB_EngineType->addItem("Hybrid");
-    // ui->CB_EngineType->show();
-
-    // connect(mCBEngineType, &QComboBox::currentTextChanged, this, &CarData::engineTypeChanged);
-
-    // qDebug() << "engineTypeComboBox 2 " << country;
 }
 
 void CarData::ownerTypeComboBox()
@@ -96,29 +64,35 @@ void CarData::ownerTypeComboBox()
 
 void CarData::engineCapacityLineEdit()
 {
-    // mLabelEngineCapacity = new QLabel(ui->centrawidget);
-    // mLabelEngineCapacity->setGeometry(x + 130 + 30, y + 10, 140, 16);
-    // mLabelEngineCapacity->setText("Engine capacity(cc/cm)");
-    // mLabelEngineCapacity->show();
-
-    // mLineEditEngineCapacity = new QLineEdit(ui->centrawidget);
-    // mLineEditEngineCapacity->setGeometry(x + 130 + 30, y + 30, 115, 20);
-    // mLineEditEngineCapacity->setText("0");
-    // mLineEditEngineCapacity->show();
-
-
+    auto validator = new QIntValidator(0, 999999, this);
+    ui->LE_EngineCapacity->setValidator(validator);
+    ui->LE_EngineCapacity->setText("0");
 }
 
 void CarData::yearOfProductionLineEdit()
 {
-    // mLineEditYearProduct = new QLineEdit(ui->widget);
+    auto validator = new QIntValidator(0, 9999, this);
+    ui->LE_YearProduct->setValidator(validator);
+    ui->LE_YearProduct->setText("0");
 }
 
-// getters bunch
-// QFrame* CarData::getCarDataFrame()
-// {
-//     return mCarDataFrame;
-// }
+void CarData::enginePowerLineEdit()
+{
+    auto validator = new QIntValidator(0, 9999, this);
+    ui->LE_EnginePower->setValidator(validator);
+    ui->LE_EnginePower->setText("0");
+}
+
+void CarData::vehicleWeightLineEdit()
+{
+    auto validator = new QIntValidator(0, 9999, this);
+    ui->LE_VehicleWeight->setValidator(validator);
+    ui->LE_VehicleWeight->setText("0");
+}
+
+
+
+
 
 QComboBox* CarData::getCarDataEngineType()
 {

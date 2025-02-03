@@ -6,7 +6,7 @@ Auction::Auction(QWidget *parent, Ui::MainWindow* tmpUI)
 
 }
 
-void Auction::auctionComboBox()
+void Auction::auctionInUsaComboBox()
 {
 
     ui->CB_Auction->addItem("Manheim Auction");
@@ -21,7 +21,16 @@ void Auction::auctionLabel()
 
 }
 
-void Auction::auctionLineEdit()
+void Auction::auctionCarDealerFeesLineEdit()
 {
-    ui->lEditBrokerFees->textEdited(0);
+    auto validator = new QIntValidator(0, 99999999, this);
+    ui->LE_CarDealerFees->setValidator(validator);
+    ui->LE_CarDealerFees->textEdited(0);
+}
+
+void Auction::auctionCarBuyPriceLineEdit()
+{
+    auto validator = new QIntValidator(0, 99999999, this);
+    ui->LE_AuctionCarBuyPrice->setValidator(validator);
+    ui->LE_AuctionCarBuyPrice->textEdited(0);
 }
