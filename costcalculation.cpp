@@ -1,7 +1,8 @@
 #include "costcalculation.h"
 
-CostCalculation::CostCalculation(QWidget *parent)
+CostCalculation::CostCalculation(QWidget *parent, Ui::MainWindow* tmpUI)
     : QMainWindow{parent}
+    , ui(tmpUI)
 {}
 
 
@@ -19,7 +20,17 @@ void CostCalculation::manheimAuctionFees() {
 
 
 
+void CostCalculation::calculation()
+{
+    qDebug() << 111;
+    qDebug() << Q_FUNC_INFO << ui->CB_Auction->currentText();
+    // mUSAuction = ui->CB_Auction->currentText();
 
+    qDebug() << Q_FUNC_INFO << mUSAuction;
+
+    QString tmpAuctionPrice = mUSAuction;// + "purchase price: " + ui->LE_AuctionCarBuyPrice->text();
+    // ui->TE_Calculation->append(tmpAuctionPrice);
+}
 
 void CostCalculation::setDestinationCountry(const QString& data)
 {

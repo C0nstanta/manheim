@@ -79,9 +79,9 @@ void MainWindow::onEngineTypeChanged(const QString &text)
 // calculation
 void MainWindow::calculation()
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << ui->CB_Auction->currentText();
 
-    ui->TE_Calculation->append("Hello");
+    mCostCalculation->calculation();
 }
 
 // update all calculated data

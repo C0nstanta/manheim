@@ -1,13 +1,19 @@
 #ifndef COSTCALCULATION_H
 #define COSTCALCULATION_H
 
+#include "./ui_mainwindow.h"
+
 #include <QMainWindow>
+#include <QWidget>
+#include <QComboBox>
+#include <QLineEdit>
+#include <QTextEdit>
 
 class CostCalculation : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit CostCalculation(QWidget *parent = nullptr);
+    explicit CostCalculation(QWidget *parent = nullptr, Ui::MainWindow* tmpUI = nullptr);
 
 // signals:
 
@@ -30,7 +36,11 @@ public:
 
     void setCarInsurance(const bool data);
 
+    void calculation();
+
 private:
+    Ui::MainWindow* ui;
+
     QString mDestinationCountry{};
     QString mUSPort{};
     QString mUSAuction{};
