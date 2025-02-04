@@ -18,7 +18,7 @@ void CarData::carDataActivate()
 {
     engineTypeComboBox();
     ownerTypeComboBox();
-    yearOfProductionLineEdit();
+    ageOfCarLineEdit();
     enginePowerLineEdit();
     vehicleWeightLineEdit();
     engineCapacityLineEdit();
@@ -69,11 +69,11 @@ void CarData::engineCapacityLineEdit()
     ui->LE_EngineCapacity->setText("0");
 }
 
-void CarData::yearOfProductionLineEdit()
+void CarData::ageOfCarLineEdit()
 {
-    auto validator = new QIntValidator(0, 9999, this);
-    ui->LE_YearProduct->setValidator(validator);
-    ui->LE_YearProduct->setText("0");
+    auto validator = new QIntValidator(0, 999, this);
+    ui->LE_AgeOfCar->setValidator(validator);
+    ui->LE_AgeOfCar->setText("0");
 }
 
 void CarData::enginePowerLineEdit()

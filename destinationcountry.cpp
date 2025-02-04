@@ -8,13 +8,13 @@ DestinationCountry::DestinationCountry(QWidget *parent, Ui::MainWindow* tmpUI)
 
 void DestinationCountry::destiantionCountryComboBox() {
 
-    ui->mCBDestinationCountry->addItem("Armenia");
-    ui->mCBDestinationCountry->addItem("Georgia");
-    ui->mCBDestinationCountry->addItem("Kazakhstan");
-    ui->mCBDestinationCountry->addItem("Kyrgyzstan");
-    ui->mCBDestinationCountry->addItem("Poland");
-    ui->mCBDestinationCountry->addItem("Russia");
-    ui->mCBDestinationCountry->addItem("Ukraine");
-    ui->mCBDestinationCountry->addItem("USA");
+    ui->CB_DestinationCountry->addItem("Armenia");
+    ui->CB_DestinationCountry->addItem("Georgia");
+    ui->CB_DestinationCountry->addItem("Kazakhstan");
+    ui->CB_DestinationCountry->addItem("Kyrgyzstan");
+    ui->CB_DestinationCountry->addItem("Poland");
+    ui->CB_DestinationCountry->addItem("Russia");
+    ui->CB_DestinationCountry->addItem("Ukraine");
+    ui->CB_DestinationCountry->addItem("USA");
 
 }

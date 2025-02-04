@@ -19,7 +19,7 @@ void PortLoading::portLoadingComboBox() {
 
 void PortLoading::portChargeLineEdit()
 {
-    QIntValidator *validator = new QIntValidator(0, 99999999, this);
-    ui->LE_PortCharges->setValidator(validator);
-    ui->LE_PortCharges->textEdited(0);
+    // QIntValidator *validator = new QIntValidator(0, 99999999, this);
+    // ui->LE_PortCharges->setValidator(validator);
+    // ui->LE_PortCharges->textEdited(0);
 }

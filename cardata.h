@@ -23,7 +23,7 @@ public:
     void vehicleWeightLineEdit();
     void engineTypeComboBox();
     void engineCapacityLineEdit();
-    void yearOfProductionLineEdit();
+    void ageOfCarLineEdit();
     void ownerTypeComboBox();
 
 

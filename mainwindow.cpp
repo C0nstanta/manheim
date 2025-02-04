@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     , mInsurance(new Insurance(nullptr, ui))
     , mPortLoading(new PortLoading(nullptr, ui))
     , mDestinationCountry(new DestinationCountry(nullptr, ui))
-    , mCostCalculation(new CostCalculation(nullptr))
+    , mCostCalculation(new CostCalculation(nullptr, ui))
 {
     ui->setupUi(this);
 
@@ -33,17 +33,23 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->CB_Auction, &QComboBox::currentTextChanged, this, &MainWindow::auctionPlaceUpd);
     connect(ui->CB_USPortLoading, &QComboBox::currentTextChanged, this, &MainWindow::portLoadingPlaceUpd);
     connect(ui->CB_CarInsurance, &QComboBox::currentTextChanged, this, &MainWindow::carInsuranceUpd);
-    connect(ui->mCBDestinationCountry, &QComboBox::currentTextChanged, this, &MainWindow::destinationCountryUpd);
+    connect(ui->CB_DestinationCountry, &QComboBox::currentTextChanged, this, &MainWindow::destinationCountryUpd);
 
     connect(ui->CB_OwnerType, &QComboBox::currentTextChanged, this, &MainWindow::ownerTypeUpd);
     connect(ui->CB_EngineType, &QComboBox::currentTextChanged, this, &MainWindow::engineTypeUpd);
 
     connect(ui->LE_CarDealerFees, &QLineEdit::textChanged, this, &MainWindow::carDealerFeesUpd);
-    connect(ui->LE_PortCharges, &QLineEdit::textChanged, this, &MainWindow::portChargesUpd);
+
+    // connect(ui->RB_PersUse_Yes, &QRadioButton::clicked, [this](){
+
+    // } );
+
+    // connect(ui->LE_PortCharges, &QLineEdit::textChanged, this, &MainWindow::portChargesUpd);
+
     connect(ui->LE_AuctionCarBuyPrice, &QLineEdit::textChanged, this, &MainWindow::auctionCarBuyPriceUpd);
     connect(ui->LE_EngineCapacity, &QLineEdit::textChanged, this, &MainWindow::engineCapacityUpd);
     connect(ui->LE_EnginePower, &QLineEdit::textChanged, this, &MainWindow::enginePowerUpd);
-    connect(ui->LE_YearProduct, &QLineEdit::textChanged, this, &MainWindow::yearProductUpd);
+    connect(ui->LE_AgeOfCar, &QLineEdit::textChanged, this, &MainWindow::yearProductUpd);
     connect(ui->LE_VehicleWeight, &QLineEdit:: textChanged, this, &MainWindow::vehicleWeightUpd);
 
     // quit
@@ -79,9 +85,16 @@ void MainWindow::onEngineTypeChanged(const QString &text)
 // calculation
 void MainWindow::calculation()
 {
-    qDebug() << Q_FUNC_INFO << ui->CB_Auction->currentText();
+    ui->TE_Calculation->clear();
 
     mCostCalculation->calculation();
+}
+
+// personal use checked
+void MainWindow::personalUseYes(bool checked)
+{
+    // ui->RB_PersUse_Yes->setChecked(checked);
+    qDebug() << "ui->RB_PersUse_Yes: " << checked;
 }
 
 // update all calculated data
@@ -196,7 +209,7 @@ void MainWindow::auctionPlaceReset()
 }
 void MainWindow::destinationCountryReset()
 {
-    ui->mCBDestinationCountry->setCurrentText("Armenia");
+    ui->CB_DestinationCountry->setCurrentText("Armenia");
 }
 void MainWindow::ownerTypeReset()
 {
@@ -219,6 +232,8 @@ void MainWindow::engineTypeReset()
 // clear LineEdit fields block
 void MainWindow::carDataClear()
 {
+    ui->TE_Calculation->clear();
+
     allComboBoxReset();
 
     carDealerFeesClear();
@@ -236,7 +251,7 @@ void MainWindow::carDealerFeesClear()
 }
 void MainWindow::portChargesClear()
 {
-    ui->LE_PortCharges->setText("0");
+//     ui->LE_PortCharges->setText("0");
 }
 void MainWindow::auctionCarBuyPriceClear()
 {
@@ -252,7 +267,7 @@ void MainWindow::enginePowerClear()
 }
 void MainWindow::yearProductClear()
 {
-    ui->LE_YearProduct->setText("0");
+    ui->LE_AgeOfCar->setText("0");
 }
 void MainWindow::vehicleWeightClear()
 {

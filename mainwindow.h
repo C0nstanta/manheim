@@ -44,6 +44,9 @@ private:
     // Calculation
     void calculation();
 
+    // Radio Button
+    void personalUseYes(bool checked);
+
 
     // Combo Box updates
     void auctionPlaceUpd(const QString& data);

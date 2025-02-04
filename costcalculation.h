@@ -8,6 +8,9 @@
 #include <QComboBox>
 #include <QLineEdit>
 #include <QTextEdit>
+#include <QLocale>
+#include <QDate>
+
 
 class CostCalculation : public QMainWindow
 {
@@ -37,9 +40,13 @@ public:
     void setCarInsurance(const bool data);
 
     void calculation();
+private:    
+    void taxCalculationRussia();
+    void taxCalculationUkraine(int32_t& tax, int32_t& capacityCoeff, double& exciseTax, int32_t& VAT);
 
-private:
+
     Ui::MainWindow* ui;
+    QLocale usLocale;
 
     QString mDestinationCountry{};
     QString mUSPort{};
@@ -47,10 +54,10 @@ private:
     QString mEngineType{};
     QString mOwnerType{};
 
-
     double AUCTION_FEE{0.};
     uint16_t TRANSPORT_AUCTION_PORT{0};
     uint16_t SENDING_OF_DOCUMENTS{250};
+    uint16_t TRANSPORT_DESTINATION_PORT{0};
 
     uint16_t mAuctionCarBuyPrice{0};
     uint16_t mPortCharges{0};
@@ -58,7 +65,7 @@ private:
     uint16_t mEngineCapacity{0};
     uint16_t mEnginePower{0};
     uint16_t mVehicleWeight{0};
-    uint16_t mYearOfProduct{0};
+    uint16_t mAgeOfCar{0};
 
     bool mCarInsurance{false};
 };
