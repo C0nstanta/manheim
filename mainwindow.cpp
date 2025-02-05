@@ -12,7 +12,15 @@ MainWindow::MainWindow(QWidget *parent)
     , mDestinationCountry(new DestinationCountry(nullptr, ui))
     , mCostCalculation(new CostCalculation(nullptr, ui))
 {
+
     ui->setupUi(this);
+
+    manager = new QNetworkAccessManager(this);
+    connect(manager, &QNetworkAccessManager::finished, this, &MainWindow::onReplyFinished);
+
+    QButtonGroup *buttonGroup = new QButtonGroup(this);
+    buttonGroup->addButton(ui->RB_PersUse_Yes);
+    buttonGroup->addButton(ui->RB_PersUse_No);
 
     mAuction->auctionInUsaComboBox();
     mAuction->auctionLabel();
@@ -40,9 +48,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->LE_CarDealerFees, &QLineEdit::textChanged, this, &MainWindow::carDealerFeesUpd);
 
-    // connect(ui->RB_PersUse_Yes, &QRadioButton::clicked, [this](){
-
-    // } );
+    connect(ui->RB_PersUse_Yes, &QRadioButton::clicked, this, &MainWindow::personalUseYes);
+    connect(ui->RB_PersUse_No, &QRadioButton::clicked, this, &MainWindow::personalUseNo);
 
     // connect(ui->LE_PortCharges, &QLineEdit::textChanged, this, &MainWindow::portChargesUpd);
 
@@ -64,7 +71,19 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
+void MainWindow::fetchData()
+{
+    QUrl url("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json");
+    QNetworkRequest request(url);
+    request.setRawHeader("User-Agent", "Qt HTTP Client");
 
+    // Send GET request
+    QNetworkReply *reply = manager->get(request);
+
+    // Handle SSL errors (for self-signed certificates)
+    connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::errorOccurred),
+            this, &MainWindow::onNetworkError);
+}
 
 void MainWindow::handleComboBoxChange(const QString& text)
 {
@@ -93,8 +112,19 @@ void MainWindow::calculation()
 // personal use checked
 void MainWindow::personalUseYes(bool checked)
 {
-    // ui->RB_PersUse_Yes->setChecked(checked);
+    ui->RB_PersUse_Yes->setChecked(checked);
     qDebug() << "ui->RB_PersUse_Yes: " << checked;
+    qDebug() << "ui->RB_PersUse_No->isChecked(): " << ui->RB_PersUse_No->isChecked();
+    qDebug() << "ui->RB_PersUse_Yes->isChecked(): " << ui->RB_PersUse_Yes->isChecked();
+
+}
+
+void MainWindow::personalUseNo(bool checked)
+{
+    ui->RB_PersUse_No->setChecked(checked);
+    qDebug() << "ui->RB_PersUse_No: " << checked;
+    qDebug() << "ui->RB_PersUse_No->isChecked(): " << ui->RB_PersUse_No->isChecked();
+    qDebug() << "ui->RB_PersUse_Yes->isChecked(): " << ui->RB_PersUse_Yes->isChecked();
 }
 
 // update all calculated data
@@ -283,6 +313,14 @@ void ownerTypeUpd(const QString& data);
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete mAuction;
+    delete mCarData;
+    delete mCarDealer;
+    delete mInsurance;
+    delete mPortLoading;
+    delete mDestinationCountry;
+    delete mCostCalculation;
+    delete manager;
 }
 
 

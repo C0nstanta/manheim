@@ -10,7 +10,7 @@
 #include <QTextEdit>
 #include <QLocale>
 #include <QDate>
-
+#include <QButtonGroup>
 
 class CostCalculation : public QMainWindow
 {
@@ -41,7 +41,7 @@ public:
 
     void calculation();
 private:    
-    void taxCalculationRussia();
+    void taxCalculationRussia(double& customsFee, double& tax, double& recyclingFee);
     void taxCalculationUkraine(int32_t& tax, int32_t& capacityCoeff, double& exciseTax, int32_t& VAT);
 
 

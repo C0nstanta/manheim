@@ -11,6 +11,12 @@
 #include "costcalculation.h"
 
 #include <QMainWindow>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonObject>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -29,8 +35,7 @@ public:
 
     void exit();
 
-
-
+    void fetchData();
 
 
 public slots:
@@ -40,12 +45,41 @@ public slots:
 private slots:
     void onEngineTypeChanged(const QString &text);  // Slot to handle dynamic combobox
 
+private slots:
+    void onReplyFinished(QNetworkReply *reply)
+    {
+        if (reply->error() != QNetworkReply::NoError) {
+            qDebug() << "Request failed: " << reply->errorString();
+        } else {
+            QByteArray responseData = reply->readAll();
+            qDebug() << "Response received:" << responseData;
+
+            // Parse JSON response
+            QJsonDocument jsonResponse = QJsonDocument::fromJson(responseData);
+            if (!jsonResponse.isNull() && jsonResponse.isObject()) {
+                QJsonObject jsonObject = jsonResponse.object();
+                if (jsonObject.contains("eur")) {
+                    qDebug() << "EUR Exchange Data:" << jsonObject["eur"].toObject();
+                }
+            }
+        }
+
+        // Cleanup
+        reply->deleteLater();
+    }
+
+    void onNetworkError(QNetworkReply::NetworkError code)
+    {
+        qDebug() << "Network error occurred:" << code;
+    }
 private:
     // Calculation
     void calculation();
 
     // Radio Button
     void personalUseYes(bool checked);
+    void personalUseNo(bool checked);
+
 
 
     // Combo Box updates
@@ -96,6 +130,7 @@ private:
     CostCalculation* mCostCalculation;
 
 
-
+    QNetworkAccessManager *manager;
+    QNetworkRequest request;
 };
 #endif // MAINWINDOW_H

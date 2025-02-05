@@ -3,7 +3,8 @@
 CostCalculation::CostCalculation(QWidget *parent, Ui::MainWindow* tmpUI)
     : QMainWindow{parent}
     , ui(tmpUI)
-{}
+{
+}
 
 
 void CostCalculation::manheimAuctionFees() {
@@ -130,9 +131,11 @@ void CostCalculation::calculation()
     ui->TE_Calculation->append("Total: " + QString::number(int(totalCost)));
 }
 
-void CostCalculation::taxCalculationRussia()
+void CostCalculation::taxCalculationRussia(double& customsFee, double& tax, double& recyclingFee)
 {
+    if(mAgeOfCar < 3 && mAuctionCarBuyPrice <= 8500) {
 
+    }
 }
 
 
