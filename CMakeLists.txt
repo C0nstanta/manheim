@@ -9,8 +9,10 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+# find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+# find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets Network)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Network)
+set(QT_VERSION_MAJOR 6)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -30,6 +32,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         cardealer.h cardealer.cpp
         cardata.h cardata.cpp
         costcalculation.h costcalculation.cpp
+        networkmanager.h networkmanager.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET ManheimCalculator APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -49,12 +52,19 @@ else()
     endif()
 endif()
 
-target_link_libraries(ManheimCalculator PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+# target_link_libraries(ManheimCalculator PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+# Link Qt libraries
+target_link_libraries(ManheimCalculator PRIVATE
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Network
+)
+
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
-if(${QT_VERSION} VERSION_LESS 6.1.0)
+if(${QT_VERSION_MAJOR} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.ManheimCalculator)
 endif()
 set_target_properties(ManheimCalculator PROPERTIES

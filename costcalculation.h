@@ -40,6 +40,8 @@ public:
     void setCarInsurance(const bool data);
 
     void calculation();
+
+    void setEurToUsdCoeff(double usdCoeff);
 private:    
     void taxCalculationRussia(double& customsFee, double& tax, double& recyclingFee);
     void taxCalculationUkraine(int32_t& tax, int32_t& capacityCoeff, double& exciseTax, int32_t& VAT);
@@ -54,6 +56,7 @@ private:
     QString mEngineType{};
     QString mOwnerType{};
 
+    double mEurToUsdCoeff{1.04};
     double AUCTION_FEE{0.};
     uint16_t TRANSPORT_AUCTION_PORT{0};
     uint16_t SENDING_OF_DOCUMENTS{250};

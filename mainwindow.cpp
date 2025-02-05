@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -11,12 +12,13 @@ MainWindow::MainWindow(QWidget *parent)
     , mPortLoading(new PortLoading(nullptr, ui))
     , mDestinationCountry(new DestinationCountry(nullptr, ui))
     , mCostCalculation(new CostCalculation(nullptr, ui))
+    , mNetManager(new NetworkManager(this))
 {
 
     ui->setupUi(this);
 
-    manager = new QNetworkAccessManager(this);
-    connect(manager, &QNetworkAccessManager::finished, this, &MainWindow::onReplyFinished);
+    connect(mNetManager, &NetworkManager::dataReceived, this, &MainWindow::handleUSDResponse);
+    mNetManager->fetchData();
 
     QButtonGroup *buttonGroup = new QButtonGroup(this);
     buttonGroup->addButton(ui->RB_PersUse_Yes);
@@ -71,23 +73,16 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
-void MainWindow::fetchData()
+void MainWindow::handleUSDResponse(const double usd)
 {
-    QUrl url("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json");
-    QNetworkRequest request(url);
-    request.setRawHeader("User-Agent", "Qt HTTP Client");
+    mCostCalculation->setEurToUsdCoeff(usd);
 
-    // Send GET request
-    QNetworkReply *reply = manager->get(request);
-
-    // Handle SSL errors (for self-signed certificates)
-    connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::errorOccurred),
-            this, &MainWindow::onNetworkError);
+    qDebug() << "USD response: " << usd;
 }
 
 void MainWindow::handleComboBoxChange(const QString& text)
 {
-qDebug() << "Combo Box Value: " << text;
+    qDebug() << "Combo Box Value: " << text;
 }
 
 void MainWindow::handleLineEditChange(const QString &text)
@@ -320,7 +315,7 @@ MainWindow::~MainWindow()
     delete mPortLoading;
     delete mDestinationCountry;
     delete mCostCalculation;
-    delete manager;
+    delete mNetManager;
 }
 
 

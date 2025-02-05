@@ -1,5 +1,6 @@
 #include "costcalculation.h"
 
+
 CostCalculation::CostCalculation(QWidget *parent, Ui::MainWindow* tmpUI)
     : QMainWindow{parent}
     , ui(tmpUI)
@@ -39,10 +40,14 @@ void CostCalculation::manheimAuctionFees() {
 
 }
 
-
+void CostCalculation::setEurToUsdCoeff(double usdCoeff)
+{
+    mEurToUsdCoeff = usdCoeff;
+}
 
 void CostCalculation::calculation()
 {
+
     // update vars
     manheimAuctionFees();
 
