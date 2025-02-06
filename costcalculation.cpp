@@ -16,6 +16,7 @@ void CostCalculation::manheimAuctionFees() {
     mEngineCapacity = ui->LE_EngineCapacity->text().toInt();
     mEngineType = ui->CB_EngineType->currentText();
     mCarDealerFee = ui->LE_CarDealerFees->text().toInt();
+    mIsPersonalUse = ui->RB_PersUse_Yes->isChecked();
 
 
     if(mUSAuction == "Manheim Auction") {
@@ -43,6 +44,11 @@ void CostCalculation::manheimAuctionFees() {
 void CostCalculation::setEurToUsdCoeff(double usdCoeff)
 {
     mEurToUsdCoeff = usdCoeff;
+}
+
+void CostCalculation::serPersonalUse(const bool data)
+{
+    mIsPersonalUse = data;
 }
 
 void CostCalculation::calculation()
@@ -110,7 +116,19 @@ void CostCalculation::calculation()
         double tax = 0.;
         double recyclingFee = 0.;
 
+        taxCalculationRussia(tax);
+        recyclingFeeCalculationRussia(recyclingFee);
 
+        ui->TE_Calculation->append("Customs Fee: $" + QString::number(int(customsFee)));
+        ui->TE_Calculation->append("Tax: $" + QString::number(int(tax)));
+        ui->TE_Calculation->append("Recycling Fee: $" + QString::number(int(recyclingFee)));
+
+        totalCost += tax;
+        totalCost += recyclingFee;
+        totalCost += customsFee;
+
+        ui->TE_Calculation->append("ЭПТС + СБКТС: $" + QString::number(400));
+        totalCost += 400;
 
     } else if(mDestinationCountry == "Ukraine") {
         int tax = 0;
@@ -136,11 +154,114 @@ void CostCalculation::calculation()
     ui->TE_Calculation->append("Total: " + QString::number(int(totalCost)));
 }
 
-void CostCalculation::taxCalculationRussia(double& customsFee, double& tax, double& recyclingFee)
-{
-    if(mAgeOfCar < 3 && mAuctionCarBuyPrice <= 8500) {
+void CostCalculation::recyclingFeeCalculationRussia(double& recyclingFee) {
+    double tmpVal = 0.;
+    if(mIsPersonalUse == true) {
+        if(mAgeOfCar <= 3 ) {
+            tmpVal = (mEngineCapacity * 0.17);
+        } else {
+            tmpVal = (mEngineCapacity * 0.26);
+        }
+        recyclingFee = tmpVal;
 
+        return ;
     }
+
+    if(ui->CB_EngineType->currentText() == "Electric") {
+        if(mAgeOfCar <= 3 ){
+            tmpVal = (mEngineCapacity * 1.63);
+        } else {
+            tmpVal = (mEngineCapacity * 6.1);
+        }
+    } else {
+        if(mAgeOfCar <= 3 ) {
+            if(mEngineCapacity <= 1000) {
+                tmpVal = 2.41 * mEngineCapacity;
+            } else if(mEngineCapacity > 1000 && mEngineCapacity <= 2000) {
+                tmpVal = 8.92 * mEngineCapacity;
+            } else if(mEngineCapacity > 2000 && mEngineCapacity <= 3000) {
+                tmpVal = 12,98 * mEngineCapacity;
+            } else if(mEngineCapacity > 3000 && mEngineCapacity <= 3500) {
+                tmpVal = 14.08 * mEngineCapacity;
+            } else if(mEngineCapacity > 3500) {
+                tmpVal = 22,25 * mEngineCapacity;
+            }
+        } else {
+            if(mEngineCapacity <= 1000) {
+                tmpVal = 6.15 * mEngineCapacity;
+            } else if(mEngineCapacity > 1000 && mEngineCapacity <= 2000) {
+                tmpVal = 15.69 * mEngineCapacity;
+            } else if(mEngineCapacity > 2000 && mEngineCapacity <= 3000) {
+                tmpVal = 24.01 * mEngineCapacity;
+            } else if(mEngineCapacity > 3000 && mEngineCapacity <= 3500) {
+                tmpVal = 28.5 * mEngineCapacity;
+            } else if(mEngineCapacity > 3500) {
+                tmpVal = 35.01 * mEngineCapacity;
+            }
+
+        }
+    }
+
+    recyclingFee = tmpVal;
+}
+
+void CostCalculation::taxCalculationRussia(double& tax)
+{
+    double percentPrice{0.};
+    double engineCCPrice{0.};
+    if(mAgeOfCar <= 3 ){
+        if(mAuctionCarBuyPrice <= (8500 * mEurToUsdCoeff)) {
+            percentPrice = mAuctionCarBuyPrice * 0.54; //(54%)
+            engineCCPrice = mEngineCapacity * (2.5 * mEurToUsdCoeff); // 2.5 Euro per cc
+        } else if(mAuctionCarBuyPrice > (8'500 * mEurToUsdCoeff) && mAuctionCarBuyPrice <= (16'700 * mEurToUsdCoeff)) {
+            percentPrice = mAuctionCarBuyPrice * 0.48; //(48%)
+            engineCCPrice = mEngineCapacity * (3.5 * mEurToUsdCoeff); // 3.5 Euro per cc
+        } else if(mAuctionCarBuyPrice > (16'700 * mEurToUsdCoeff) && mAuctionCarBuyPrice <= (42'300 * mEurToUsdCoeff)) {
+            percentPrice = mAuctionCarBuyPrice * 0.48; //(48%)
+            engineCCPrice = mEngineCapacity * (5.5 * mEurToUsdCoeff); // 5.5 Euro per cc
+        } else if(mAuctionCarBuyPrice > (42'300 * mEurToUsdCoeff) && mAuctionCarBuyPrice <= (84'500 * mEurToUsdCoeff)) {
+            percentPrice = mAuctionCarBuyPrice * 0.48; //(48%)
+            engineCCPrice = mEngineCapacity * (7.5 * mEurToUsdCoeff); // 7.5 Euro per cc
+        } else if(mAuctionCarBuyPrice > (84'500 * mEurToUsdCoeff) && mAuctionCarBuyPrice <= (169'000 * mEurToUsdCoeff)) {
+            percentPrice = mAuctionCarBuyPrice * 0.48; //(48%)
+            engineCCPrice = mEngineCapacity * (15.0 * mEurToUsdCoeff); // 15.0 Euro per cc
+        } else if(mAuctionCarBuyPrice > (169'000 * mEurToUsdCoeff)) {
+            percentPrice = mAuctionCarBuyPrice * 0.48; //(48%)
+            engineCCPrice = mEngineCapacity * (20.0 * mEurToUsdCoeff); // 20.0 Euro per cc
+        }
+    } else if(mAgeOfCar > 3 && mAgeOfCar <=5) {
+        if(mEngineCapacity <= 1000) {
+            engineCCPrice = mEngineCapacity * (1.5 * mEurToUsdCoeff); // 1.5 Euro per cc
+        } else if(mEngineCapacity > 1000 && mEngineCapacity <= 1500) {
+            engineCCPrice = mEngineCapacity * (1.7 * mEurToUsdCoeff); // 1.7 Euro per cc
+        } else if(mEngineCapacity > 1500 && mEngineCapacity <= 1800) {
+            engineCCPrice = mEngineCapacity * (2.5 * mEurToUsdCoeff); // 2.5 Euro per cc
+        } else if(mEngineCapacity > 1800 && mEngineCapacity <= 2300) {
+            engineCCPrice = mEngineCapacity * (2.7 * mEurToUsdCoeff); // 2.7 Euro per cc
+        } else if(mEngineCapacity > 2300 && mEngineCapacity <= 3000) {
+            engineCCPrice = mEngineCapacity * (3.0 * mEurToUsdCoeff); // 3.0 Euro per cc
+        } else if(mEngineCapacity > 3000) {
+            engineCCPrice = mEngineCapacity * (3.6 * mEurToUsdCoeff); // 3.6 Euro per cc
+        }
+    } else if(mAgeOfCar > 5) {
+        if(mEngineCapacity <= 1000) {
+            engineCCPrice = mEngineCapacity * (3.0 * mEurToUsdCoeff); // 3.0 Euro per cc
+        } else if(mEngineCapacity > 1000 && mEngineCapacity <= 1500) {
+            engineCCPrice = mEngineCapacity * (3.2 * mEurToUsdCoeff); // 3.2 Euro per cc
+        } else if(mEngineCapacity > 1500 && mEngineCapacity <= 1800) {
+            engineCCPrice = mEngineCapacity * (3.5 * mEurToUsdCoeff); // 3.5 Euro per cc
+        } else if(mEngineCapacity > 1800 && mEngineCapacity <= 2300) {
+            engineCCPrice = mEngineCapacity * (4.8 * mEurToUsdCoeff); // 4.8 Euro per cc
+        } else if(mEngineCapacity > 2300 && mEngineCapacity <= 3000) {
+            engineCCPrice = mEngineCapacity * (5.0 * mEurToUsdCoeff); // 5.0 Euro per cc
+        } else if(mEngineCapacity > 3000) {
+            engineCCPrice = mEngineCapacity * (5.7 * mEurToUsdCoeff); // 3.6 Euro per cc
+        }
+    }
+
+    tax = std::max(percentPrice, engineCCPrice);
+
+    qDebug() << "tax: " << tax;
 }
 
 

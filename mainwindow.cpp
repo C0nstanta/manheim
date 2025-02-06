@@ -108,6 +108,8 @@ void MainWindow::calculation()
 void MainWindow::personalUseYes(bool checked)
 {
     ui->RB_PersUse_Yes->setChecked(checked);
+
+    mCostCalculation->serPersonalUse(checked);
     qDebug() << "ui->RB_PersUse_Yes: " << checked;
     qDebug() << "ui->RB_PersUse_No->isChecked(): " << ui->RB_PersUse_No->isChecked();
     qDebug() << "ui->RB_PersUse_Yes->isChecked(): " << ui->RB_PersUse_Yes->isChecked();

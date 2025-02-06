@@ -42,8 +42,12 @@ public:
     void calculation();
 
     void setEurToUsdCoeff(double usdCoeff);
-private:    
-    void taxCalculationRussia(double& customsFee, double& tax, double& recyclingFee);
+
+    void serPersonalUse(const bool data);
+private:
+    void recyclingFeeCalculationRussia(double& recyclingFee);
+    void taxCalculationRussia(double& tax);
+
     void taxCalculationUkraine(int32_t& tax, int32_t& capacityCoeff, double& exciseTax, int32_t& VAT);
 
 
@@ -71,6 +75,7 @@ private:
     uint16_t mAgeOfCar{0};
 
     bool mCarInsurance{false};
+    bool mIsPersonalUse{true};
 };
 
 #endif // COSTCALCULATION_H
